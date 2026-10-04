@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bookaholic"
+version = "1.0.0"
+authors = [
+  {name = "Alejandro Nina Callizaya"},
+  {name = "Finn Roy"},
+  {name = "Jayden Knight"},
+  {name = "Tobi Mimiko"}
+]
+
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "num2words",
+    "requests"
+]
