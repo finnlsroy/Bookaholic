@@ -17,5 +17,6 @@ requires-python = ">=3.11"
 
 dependencies = [
     "num2words",
-    "requests"
+    "requests",
+    "setuptools"
 ]
