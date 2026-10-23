@@ -23,6 +23,9 @@ class Status(Data):
         
         return cls(start_date, end_date)
 
+    def finish_book(self, end_date: str):
+        self["end_date"] = date.fromisoformat(end_date)
+
     def to_data(self) -> Status._Data:
         data = dict()
 

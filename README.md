@@ -4,7 +4,11 @@ Here's the code I've written so far.
 
 Jayden and Tobi, look at __main__.py for what functions you can build around. If you're missing something, tell me.
 
-Alejandro, the objects Status and Book might be good places to put five star ratings and book stats.
+Alejandro, the object Status might be a good place to put the five star rating. Look at __main__.finish_book, book.status.Status.finish_book, and the Status object in general. For the book statistics, you can build them intot the book.Book object.
+
+
+
+
 
 Here's the list of necessary features:
 - Page counter
