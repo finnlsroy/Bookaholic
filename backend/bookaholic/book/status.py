@@ -2,7 +2,7 @@ from typing import Optional
 
 from datetime import date, datetime
 
-from bookaholic.book._data import Data
+from bookaholic._data import Data
 
 
 class Status(Data):

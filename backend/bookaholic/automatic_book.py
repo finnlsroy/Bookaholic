@@ -4,7 +4,7 @@ import json
 
 import requests
 
-from bookaholic import _string_utils
+from bookaholic._string_utils import compare
 from bookaholic.book import Book
 from bookaholic.book.metadata import Metadata
 from bookaholic.book.status import Status
@@ -19,7 +19,7 @@ class AutomaticBook(Book):
         params = {
             "q":"language:eng",
             "fields": "key,title,subtitle,author_name,number_of_pages_median,editions,editions.cover_i,subject",
-            **fields
+            **fields # type: ignore
         }
 
         response = requests.get("https://openlibrary.org/search.json", params=params)
@@ -71,8 +71,8 @@ class AutomaticBook(Book):
         }
         
         def filter(fields: AutomaticBook._Fields, results: AutomaticBook._Result) -> bool:
-            title_is_match = _string_utils.compare(fields["title"], results["title"])
-            author_is_match = any((_string_utils.compare(fields["author"], a) for a in results["author_name"]))
+            title_is_match = compare(fields["title"], results["title"])
+            author_is_match = any((compare(fields["author"], a) for a in results["author_name"]))
             
             return title_is_match and author_is_match
         
@@ -84,3 +84,21 @@ class AutomaticBook(Book):
         filter = lambda *_: True
 
         return cls(fields, filter)
+
+if __name__ == "__main__":
+    print("Demo of automatic book lookup.", end="\n\n")
+
+    title = input("Enter the book's title: ")
+    author = input("Enter the book's author: ")
+
+    book = AutomaticBook.new_from_title_and_author_search(title, author)
+
+    if book is not None:
+        print("\nTitle:", book["metadata"]["title"])
+        print("Author:", book["metadata"]["author"])
+        print("Number of Pages:", book["metadata"]["n_pages"])
+        print("Cover URL:", book["metadata"]["cover_url"])
+        print("Book is Fiction:", book["subject"]["fiction"])
+        print("Genre(s):", ", ".join(book["subject"]["genres"]))
+    else:
+        print("Book not found.")

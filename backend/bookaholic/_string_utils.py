@@ -10,7 +10,10 @@ IRRELEVANT_WORDS = ["a", "an", "and", "of", "the", "to"]
 
 
 def capitalize(string: str) -> str:
-    return capwords(string)
+    words = re.split(r"\s+", string)
+    words = ["-".join([capwords(s) for s in w.split("-")]) for w in words]
+
+    return " ".join(words)
 
 def compare(a: str, b: str) -> bool:
     # Convert string to a set of comparable keywords

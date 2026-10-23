@@ -1,5 +1,11 @@
 # Dev-2.0
 
+Here's the code I've written so far.
+
+Jayden and Tobi, look at __main__.py for what functions you can build around. If you're missing something, tell me.
+
+Alejandro, the objects Status and Book might be good places to put five star ratings and book stats.
+
 Here's the list of necessary features:
 - Page counter
 - Input of title, author, # pages, genre

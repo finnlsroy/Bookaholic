@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict
 
 import json
 import os
@@ -9,12 +9,12 @@ from bookaholic.book import Book
 ROOT = os.path.expanduser(r"~\.bookaholic")
 DATA_PATH = os.path.join(ROOT, "books.json")
 
-class Library:
-    def __init__(self):
+class Library(dict):
+    _Data = Dict[str, Book._Data]
+
+    def __init__(self, ):
         # Make root if it does not already exist
         os.makedirs(ROOT, exist_ok=True)
-
-        self._books = []
 
         if os.path.exists(DATA_PATH):
 
@@ -22,18 +22,23 @@ class Library:
                 data = f.read()
 
             if data:
-                self._books = [Book.from_data(b) for b in json.loads(data)]
-            
+                books = [Book.from_data(b) for b in json.loads(data)]
 
-    def get_books(self) -> List[Book]:
-        return self._books.copy()
+                for book in books:
+                    self[id(book)] = book
 
-    def add_book(self, book: Book):
-        self._books.append(book)
+    def add_book(self, book: Book) -> int:
+        id_ = id(book)
+        self[id_] = book
 
-    def remove_book(self, book: Book):
-        self._books.remove(book)
+        return id_
+
+    def remove_book(self, book_id: int):
+        del self[book_id]
+
+    def to_data(self) -> _Data:
+        return {i: b.to_data() for i, b in self.items()}
 
     def save(self):
         with open(DATA_PATH, "w") as f:
-            json.dump([b.to_data() for b in self._books], f)
+            json.dump([b.to_data() for b in self.values()], f)

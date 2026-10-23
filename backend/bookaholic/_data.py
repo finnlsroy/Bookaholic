@@ -9,4 +9,4 @@ class Data(dict):
         return cls(**data)
 
     def to_data(self) -> _Data:
-        return self.copy()
+        return self.copy() # type: ignore

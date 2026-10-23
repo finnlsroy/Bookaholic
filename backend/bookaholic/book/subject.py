@@ -1,7 +1,7 @@
 from typing import List
 
-from bookaholic import _string_utils
-from bookaholic.book._data import Data
+from bookaholic._string_utils import compare
+from bookaholic._data import Data
 
 
 FICTION_GENRES = {
@@ -23,7 +23,7 @@ NON_FICTION_GENRES = {
     "Politics": ["poli sci", "political", "polisci", "politics"],
     "Science": ["biology", "chemistry", "physics", "science"],
     "Self-Help": ["personal development", "personal growth", "self care", "self help", "self improvement"]
-}
+} 
 
 class Subject(Data):
     def __init__(self, fiction: bool, genres: List[str]):
@@ -32,14 +32,14 @@ class Subject(Data):
 
     @classmethod
     def new_from_open_library(cls, subjects: List[str]) -> Subject:
-        fiction = any((_string_utils.compare(s, "fiction") for s in subjects))
+        fiction = any((compare(s, "fiction") for s in subjects))
         possible_genres = FICTION_GENRES if fiction else NON_FICTION_GENRES
 
         genres = []
 
         for genre, keywords in possible_genres.items():                   
 
-            if any((_string_utils.compare(k, s) for k in keywords for s in subjects)):
+            if any((compare(k, s) for k in keywords for s in subjects)):
                 genres.append(genre)
 
         return Subject(fiction, genres)
