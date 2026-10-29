@@ -32,7 +32,7 @@ def create_book_by_title_and_author_search(title: str, author: str) -> Optional[
 
 @eel.expose
 def create_book_by_isbn_search(isbn: int) -> Optional[Book._Data]:
-    """Pptionally return a new book created by ISBN search (not yet present in library)"""
+    """Optionally return a new book created by ISBN search (not yet present in library)"""
     return AutomaticBook.new_from_isbn_search(isbn).to_data()
 
 @eel.expose
@@ -49,7 +49,7 @@ def finish_book(book_id: int, end_date: str) -> Book._Data:
     book = library[book_id]
     book["status"].finish_book(end_date)
 
-    return book
+    return book.to_data()
 
 @eel.expose
 def remove_book(book_id: int):
