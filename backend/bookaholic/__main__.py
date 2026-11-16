@@ -50,6 +50,38 @@ def get_rating_summary() -> Dict[str, Any]:
     return rating_manager.generate_rating_summary()
 
 @eel.expose
+def get_total_number_of_books_read() -> int:
+    return library.total_books_read()
+
+@eel.expose
+def get_total_number_of_pages_read() -> int:
+    return library.total_pages_read()
+
+@eel.expose
+def get_stats_by_year() -> Dict[int, Dict[str, int]]:
+    return library.stats_by_year()
+
+@eel.expose
+def get_stats_by_month() -> Dict[str, Dict[str, int]]:
+    return library.stats_by_month()
+
+@eel.expose
+def get_stats_by_week() -> Dict[str, Dict[str, int]]:
+    return library.stats_by_week()
+
+@eel.expose
+def get_average_number_of_pages_read() -> float:
+    return library.overall_daily_average()
+
+@eel.expose
+def get_books_ranked_by_speed() -> List[int]:
+    return library.rank_books_by_speed()
+
+@eel.expose
+def get_statistics_summary() -> Dict[str, Any]:
+    return library.generate_summary()
+
+@eel.expose
 def create_book_by_title_and_author_search(title: str, author: str) -> Optional[Book._Data]:
     """Optionally return a new book created by title and author search (not yet present in library)"""
     return AutomaticBook.new_from_title_and_author_search(title, author).to_data()

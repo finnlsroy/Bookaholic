@@ -20,6 +20,22 @@ class Book(Data):
 
         return cls(metadata, subject, rating)
 
+    @property
+    def days_spent(self) -> Optional[int]:
+        """Total days taken to read (minimum 1 day)."""
+        if self["rating"]:
+            delta = (self["rating"]["finish_date"] - self["metadata"]["start_date"]).days
+            return max(1, delta + 1)
+        
+        return None
+
+    @property
+    def reading_speed(self) -> float:
+        """Pages read per day for this book."""
+        if self.days_spent:
+            return round(self["metadata"]["n_pages"] / self.days_spent, 2)
+        return 0
+
     def to_data(self) -> Book._Data:
         data = {}
 
