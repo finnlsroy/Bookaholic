@@ -1,30 +1,30 @@
-from typing import Any, Dict
+from typing import Optional
 
 from bookaholic._data import Data
 from bookaholic.book.metadata import Metadata
-from bookaholic.book.status import Status
+from bookaholic.book.rating import Rating
 from bookaholic.book.subject import Subject
 
 
 class Book(Data):
-    def __init__(self, metadata: Metadata, subject: Subject, status: Status):
+    def __init__(self, metadata: Metadata, subject: Subject, rating: Optional[Rating]=None):
         self["metadata"] = metadata
         self["subject"] = subject
-        self["status"] = status
+        self["rating"] = rating
     
     @classmethod
     def from_data(cls, data: Book._Data) -> Book:
         metadata = Metadata.from_data(data["metadata"])
         subject = Subject.from_data(data["subject"])
-        status = Status.from_data(data["status"])
+        rating = Rating.from_data(data["rating"]) if data["rating"] else None
 
-        return cls(metadata, subject, status)
+        return cls(metadata, subject, rating)
 
     def to_data(self) -> Book._Data:
         data = {}
 
         data["metadata"] = self["metadata"].to_data()
+        data["rating"] = self["rating"].to_data() if self["rating"] else None
         data["subject"] = self["subject"].to_data()
-        data["status"] = self["status"].to_data()
 
         return data

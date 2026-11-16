@@ -1,5 +1,7 @@
 from typing import Any, Dict, Self
 
+from datetime import date
+
 
 class Data(dict):
     _Data = Dict[str, Any]
@@ -9,4 +11,13 @@ class Data(dict):
         return cls(**data)
 
     def to_data(self) -> _Data:
-        return self.copy() # type: ignore
+        data = {}
+
+        for key, val in self.items():
+            
+            if type(val) is date:
+                data[key] = val.strftime("%Y-%m-%d")
+            else:
+                data[key] = val
+        
+        return data

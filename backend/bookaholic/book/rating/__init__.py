@@ -1,0 +1,1 @@
+from bookaholic.book.rating._rating import Rating

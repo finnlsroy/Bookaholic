@@ -7,7 +7,6 @@ import requests
 from bookaholic._string_utils import compare
 from bookaholic.book import Book
 from bookaholic.book.metadata import Metadata
-from bookaholic.book.status import Status
 from bookaholic.book.subject import Subject
 
 
@@ -61,7 +60,7 @@ class AutomaticBook(Book):
         subjects = list(set([s for b in books for s in b.get("subject", [])]))
         subject = Subject.new_from_open_library(subjects)
 
-        return Book(metadata, subject, Status.new_status())
+        return Book(metadata, subject)
 
     @classmethod
     def new_from_title_and_author_search(cls, title: str, author: str) -> Book:
