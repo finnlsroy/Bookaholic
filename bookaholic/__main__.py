@@ -114,3 +114,8 @@ def remove_book(book_id: int):
     """Remove a book from library by ID"""
     library.remove_book(book_id)
     library.save()
+
+if __name__ == "__main__":
+    from pathlib import Path
+    eel.init(str(Path(__file__).resolve().parent / "frontend"))
+    eel.start("index.html", size=(1200, 800))
