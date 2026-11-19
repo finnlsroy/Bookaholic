@@ -31,7 +31,7 @@ jobs:
           python -m PyInstaller --clean --noconfirm --onefile --windowed
           --name Bookaholic
           --collect-all eel
-          --add-data="bookaholic/frontend"
+          --add-data="bookaholic/frontend:"
           bookaholic/__main__.py
 
       - name: Generate unique release tag and title
