@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Optional
 
 from bookaholic._data import Data
@@ -15,7 +13,7 @@ class Book(Data):
         self["rating"] = rating
     
     @classmethod
-    def from_data(cls, data: Book._Data) -> Book:
+    def from_data(cls, data: Book._Data):
         metadata = Metadata.from_data(data["metadata"])
         subject = Subject.from_data(data["subject"])
         rating = Rating.from_data(data["rating"]) if data["rating"] else None

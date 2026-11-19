@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import List
 
 from bookaholic._string_utils import compare
@@ -33,7 +31,7 @@ class Subject(Data):
         self["genres"] = genres
 
     @classmethod
-    def new_from_open_library(cls, subjects: List[str]) -> Subject:
+    def new_from_open_library(cls, subjects: List[str]):
         fiction = any((compare(s, "fiction") for s in subjects))
         possible_genres = FICTION_GENRES if fiction else NON_FICTION_GENRES
 
