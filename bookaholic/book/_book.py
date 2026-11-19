@@ -13,7 +13,7 @@ class Book(Data):
         self["rating"] = rating
     
     @classmethod
-    def from_data(cls, data: Book._Data):
+    def from_data(cls, data):
         metadata = Metadata.from_data(data["metadata"])
         subject = Subject.from_data(data["subject"])
         rating = Rating.from_data(data["rating"]) if data["rating"] else None
@@ -36,7 +36,7 @@ class Book(Data):
             return round(self["metadata"]["n_pages"] / self.days_spent, 2)
         return 0
 
-    def to_data(self) -> Book._Data:
+    def to_data(self):
         data = {}
 
         data["metadata"] = self["metadata"].to_data()
