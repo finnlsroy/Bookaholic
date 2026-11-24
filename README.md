@@ -5,7 +5,7 @@ Bookaholic is an app that encourages you to read more!
 Bookaholic keeps track of statistics on how fast you read, so you can gameify your reading journey and stay motivated! Bookaholic also keeps track of what books and genres you read, and lets you rate them once you're done reading.
 
 ## What platform does it run on?
-Bookaholic is a Windows desktop app that runs right on your computer.
+Bookaholic is a Windows desktop app that runs right on your computer. It requires Google Chrome.
 
 ## Why did we make Bookaholic?
 We made Bookaholic because we believe that reading is a precious and undervalued skill in this day and age. We want to use the same tricks as social media to get you addicted to something that's actually good for you!
